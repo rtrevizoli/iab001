@@ -14,22 +14,10 @@ Understand and study the data dictionary views and the Oracle commands that mana
 > Some dictionary views will be used for this purpose.  
 
 ## Connect with the user SYSTEM
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/01_Connect-w-user-SYSTEM.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Img 01 - Testing connection into orcl with SYSTEM (Success)
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/01_Connect-w-user-SYSTEM.jpg" alt="Img 01 - Testing connection into orcl with SYSTEM (Success)" width="300" height="200"/><br>
+    <em>Img 01 - Testing connection into orcl with SYSTEM (Success)</em>
+</p>
 
 ## Explain the purpose of the v$version view
 
@@ -39,24 +27,10 @@ Understand and study the data dictionary views and the Oracle commands that mana
 SELECT * FROM v$version; -- explique a finalidade da visão v$version.
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/02_Select-v$version.jpg" alt="Diagram" width="500" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 02 - Select * from v$version view
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/02_Select-v$version.jpg" alt="Img 02 - Select * from v$version view" width="500" height="200"/><br>
+    <em>Img 02 - Select * from v$version view</em>
+</p>
 
 ## Explain the purpose of the dba_users view
 
@@ -66,24 +40,10 @@ SELECT * FROM v$version; -- explique a finalidade da visão v$version.
 SELECT username FROM dba_users;  -- explique a finalidade da visão dba_users.
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/03_Select-dba_users.jpg" alt="Diagram" width="500" height="350"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 03 - Select username from dba_users view
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/03_Select-dba_users.jpg" alt="Img 03 - Select username from dba_users view" width="500" height="350"/><br>
+    <em>Img 03 - Select username from dba_users view</em>
+</p>
 
 ## Create the user USR_LAB01
 
@@ -91,24 +51,10 @@ SELECT username FROM dba_users;  -- explique a finalidade da visão dba_users.
 CREATE USER USR_LAB01 IDENTIFIED BY SENHA default tablespace users  quota unlimited on users;  
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/04_Create-user-USR_LAB01.jpg" alt="Diagram" width="500" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 04 - Creation of the user USR_LAB01
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/04_Create-user-USR_LAB01.jpg" alt="Img 04 - Creation of the user USR_LAB01" width="500" height="200"/><br>
+    <em>Img 04 - Creation of the user USR_LAB01</em>
+</p>
 
 ## Explain the purpose of the roles (CONNECT and RESOURCE)
 ### CONNECT
@@ -125,24 +71,10 @@ The `RESOURCE` role grants a user the privileges necessary to create procedures,
 GRANT CONNECT, RESOURCE to USR_LAB01;  -- explique pela documentação da oracle a finalidade das roles connect e resource
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/05_Grant-roles-to-USR_LAB01.jpg" alt="Diagram" width="500" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 05 - Grant CONNECT and RESOURCE to USR_LAB01
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/05_Grant-roles-to-USR_LAB01.jpg" alt="Img 05 - Grant CONNECT and RESOURCE to USR_LAB01" width="500" height="200"/><br>
+    <em>Img 05 - Grant CONNECT and RESOURCE to USR_LAB01</em>
+</p>
 
 ## In another window connect with the user created above
 
@@ -150,24 +82,10 @@ GRANT CONNECT, RESOURCE to USR_LAB01;  -- explique pela documentação da oracle
 -- abra outra janela e conecte com o usuário criado acima. Foi possível conectar?
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/06_Connect-w-user-USR_LAB01.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 06 - Testing connection into orcl with USR_LAB01 (Success)
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/06_Connect-w-user-USR_LAB01.jpg" alt="Img 06 - Testing connection into orcl with USR_LAB01 (Success)" width="300" height="200"/><br>
+    <em>Img 06 - Testing connection into orcl with USR_LAB01 (Success)</em>
+</p>
 
 ## Change the passwaord of USR_LAB01 connected with SYSTEM
 
@@ -176,24 +94,10 @@ GRANT CONNECT, RESOURCE to USR_LAB01;  -- explique pela documentação da oracle
 ALTER USER USR_LAB01 IDENTIFIED BY new_password;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/07_Alter-USR_LAB01-pwd-connected-w-SYSTEM.jpg" alt="Diagram" width="500" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 07 - Alter USR_LAB01's password connected as SYSTEM
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/07_Alter-USR_LAB01-pwd-connected-w-SYSTEM.jpg" alt="Img 07 - Alter USR_LAB01's password connected as SYSTEM" width="500" height="200"/><br>
+    <em>Img 07 - Alter USR_LAB01's password connected as SYSTEM</em>
+</p>
 
 ## Check the connection of USR_LAB01 in its window
 
@@ -202,24 +106,10 @@ ALTER USER USR_LAB01 IDENTIFIED BY new_password;
 select table_name from all_tables;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/08_Select-all-tables-as-USR_LAB01.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 08 - Select all tables as the user USR_LAB01
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/08_Select-all-tables-as-USR_LAB01.jpg" alt="Img 08 - Select all tables as the user USR_LAB01" width="300" height="200"/><br>
+    <em>Img 08 - Select all tables as the user USR_LAB01</em>
+</p>
 
 ## Reconect as USR_LAB01
 
@@ -231,43 +121,15 @@ A new connection was successfully established using the new password.
 -- encerre a conexão dessa janela e tente conectar novamente usando a mesma senha. Você conseguiu conectar? Tente usar a nova senha alterada no comando ALTER USER. O que aconteceu?
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/09_Connecting-as-USR_LAB01-w-old-pwd.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 09 - Connecting as USR_LAB01 with the old password
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/09_Connecting-as-USR_LAB01-w-old-pwd.jpg" alt="Img 09 - Connecting as USR_LAB01 with the old password" width="300" height="200"/><br>
+    <em>Img 09 - Connecting as USR_LAB01 with the old password</em>
+</p>
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/10_Connecting-as-USR_LAB01-w-new-pwd.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 10 - Connecting as USR_LAB01 with the new password
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/10_Connecting-as-USR_LAB01-w-new-pwd.jpg" alt="Img 10 - Connecting as USR_LAB01 with the new password" width="300" height="200"/><br>
+    <em>Img 10 - Connecting as USR_LAB01 with the new password</em>
+</p>
 
 ## In the SYSTEM user window, run the command below
 
@@ -281,24 +143,10 @@ A new connection was successfully established using the new password.
 SHOW USER;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/11_Show-user.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 11 - Show user
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/11_Show-user.jpg" alt="Img 11 - Show user" width="300" height="200"/><br>
+    <em>Img 11 - Show user</em>
+</p>
 
 ### Create table in SYSTEM user
 
@@ -308,24 +156,10 @@ The command below creates the xtz table in the `SYSTEM` user schema.
 CREATE TABLE xyz (name VARCHAR2(30));  -- esse comando cria a tabela xyz em qual usuário? 
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/12_Create-xyz-in-SYSTEM.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 12 - Create table xyz
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/12_Create-xyz-in-SYSTEM.jpg" alt="Img 12 - Create table xyz" width="300" height="200"/><br>
+    <em>Img 12 - Create table xyz</em>
+</p>
 
 ### Create table in USR_LAB01 using SYSTEM user
 
@@ -337,24 +171,10 @@ The `CREATE ANY <object_type>` privilege is required to create objects in other 
 CREATE TABLE USR_LAB01.xyz (name VARCHAR2(30));  -- esse comando cria a tabela xyz em qual usuário? Que nível de privilégio foi necessário para que isso seja possível?
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/13_Create-xyz-in-USR_LAB01.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 13 - Create table xyz in the USR_LAB01 user schema
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/13_Create-xyz-in-USR_LAB01.jpg" alt="Img 13 - Create table xyz in the USR_LAB01 user schema" width="300" height="200"/><br>
+    <em>Img 13 - Create table xyz in the USR_LAB01 user schema</em>
+</p>
 
 ## Desc `<table>`
 
@@ -368,24 +188,10 @@ CREATE TABLE USR_LAB01.xyz (name VARCHAR2(30));  -- esse comando cria a tabela x
 DESC xyz;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/14_Desc-xyz-as-USR_LAB01.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 14 - Desc table xyz as USR_LAB01
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/14_Desc-xyz-as-USR_LAB01.jpg" alt="Img 14 - Desc table xyz as USR_LAB01" width="300" height="200"/><br>
+    <em>Img 14 - Desc table xyz as USR_LAB01</em>
+</p>
 
 ### Other user schema
 
@@ -395,24 +201,10 @@ This command returns the error `ERROR: ORA-04043: object system.xyz does not exi
 DESC system.xyz;   -- esse comando funcionou? O que falta ao usuário USR_LAB01 para que esse comando funcione?
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/15_Desc-system-xyz-as-USR_LAB01.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 15 - Desc xyz table of the SYSTEM user schema
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/15_Desc-system-xyz-as-USR_LAB01.jpg" alt="Img 15 - Desc xyz table of the SYSTEM user schema" width="300" height="200"/><br>
+    <em>Img 15 - Desc xyz table of the SYSTEM user schema</em>
+</p>
 
 ## Grant `<table>` privileges to `<user>`
 
@@ -426,24 +218,10 @@ DESC system.xyz;   -- esse comando funcionou? O que falta ao usuário USR_LAB01 
 CREATE USER USR_LAB02 IDENTIFIED BY SENHA default tablespace users;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/16_Create-user-USR_LAB02.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 16 - Creation of the user USR_LAB02
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/16_Create-user-USR_LAB02.jpg" alt="Img 16 - Creation of the user USR_LAB02" width="300" height="200"/><br>
+    <em>Img 16 - Creation of the user USR_LAB02</em>
+</p>
 
 ### Grant `<table>` privileges
 
@@ -453,24 +231,11 @@ Below is a privilege grant operation, that allows `USR_LAB02` to (**INSERT** | *
 GRANT INSERT, DELETE, SELECT ON USR_LAB01.XYZ TO USR_LAB02;  -- que operação está acontecendo aqui?
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/17_Grant-table-privileges-to-user-USR_LAB02.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 17 - Grant table privileges to user USR_LAB02
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+
+<p align="center">
+    <img src="lab/assets/17_Grant-table-privileges-to-user-USR_LAB02.jpg" alt="Img 17 - Grant table privileges to user USR_LAB02" width="300" height="200"/><br>
+    <em>Img 17 - Grant table privileges to user USR_LAB02</em>
+</p>
 
 ### Grant `<connect>` role
 
@@ -478,24 +243,10 @@ GRANT INSERT, DELETE, SELECT ON USR_LAB01.XYZ TO USR_LAB02;  -- que operação e
 grant connect to USR_lab02;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/18_Grant-connect-to-user-USR_LAB02.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 18 - Grant CONNECT role to user USR_LAB02
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/18_Grant-connect-to-user-USR_LAB02.jpg" alt="Img 18 - Grant CONNECT role to user USR_LAB02" width="300" height="200"/><br>
+    <em>Img 18 - Grant CONNECT role to user USR_LAB02</em>
+</p>
 
 ### Check `<table>` privileges
 
@@ -505,24 +256,10 @@ This query returns the privileges granted to the user `USR_LAB02`.
 select * from dba_tab_privs where grantee = 'USR_LAB02';   -- qual o significado do resultado dessa consulta? 
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/19_Check-user-USR_LAB02-privileges.jpg" alt="Diagram" width="550" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 19 - Check the user USR_LAB02 privileges
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/19_Check-user-USR_LAB02-privileges.jpg" alt="Img 19 - Check the user USR_LAB02 privileges" width="550" height="200"/><br>
+    <em>Img 19 - Check the user USR_LAB02 privileges</em>
+</p>
 
 ## Test the privileges granted to `<user>`  
 
@@ -538,24 +275,10 @@ insert into usr_lab01.xyz values ('teste de nome');
 commit;
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/20_Test-insert-USB_LAB02.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 20 - Test the user USR_LAB02 insert privilege in the USR_LAB01.xyz table
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/20_Test-insert-USB_LAB02.jpg" alt="Img 20 - Test the user USR_LAB02 insert privilege in the USR_LAB01.xyz table" width="300" height="200"/><br>
+    <em>Img 20 - Test the user USR_LAB02 insert privilege in the USR_LAB01.xyz table</em>
+</p>
 
 ### Select
 
@@ -567,24 +290,10 @@ The command below was executed successfully because `USR_LAB02` was granted the 
 select * from usr_lab01.xyz;  -- mostre o resultado desse comando e explique por que ele funcionou.
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/21_USR_LAB02-select-USR_LAB01-xyz.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 21 - USR_LAB02 executes a SELECT query in the USR_LAB01.xyz table
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/21_USR_LAB02-select-USR_LAB01-xyz.jpg" alt="Img 21 - USR_LAB02 executes a SELECT query in the USR_LAB01.xyz table" width="300" height="200"/><br>
+    <em>Img 21 - USR_LAB02 executes a SELECT query in the USR_LAB01.xyz table</em>
+</p>
 
 #### Select with proper privilege
 
@@ -594,24 +303,10 @@ The command returns the error `ORA-00942: table or view does not exist` because 
 select * from system.xyz; -- mostre o resultado desse comando e explique por que ele NÃO funcionou.
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/22_USR_LAB02-select-SYSTEM-xyz.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 22 - USR_LAB02 executes a SELECT query in the SYSTEM.xyz table
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/22_USR_LAB02-select-SYSTEM-xyz.jpg" alt="Img 22 - USR_LAB02 executes a SELECT query in the SYSTEM.xyz table" width="300" height="200"/><br>
+    <em>Img 22 - USR_LAB02 executes a SELECT query in the SYSTEM.xyz table</em>
+</p>
 
 #### Select in own schema
 
@@ -621,24 +316,10 @@ The command returns the error: `ORA-00942: table or view does not exist` because
 select * from xyz; -- mostre o resultado desse comando e explique por que ele NÃO funcionou.
 ```
 
-<center>
-    <table>
-        <tr>
-            <td>
-                <center>
-                    <img src="lab/assets/23_USR_LAB02-select-xyz.jpg" alt="Diagram" width="300" height="200"/>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>
-                    Img 23 - USR_LAB02 executes a SELECT query in its own schema
-                </center>
-            </td>
-        </tr>
-    </table>
-</center>
+<p align="center">
+    <img src="lab/assets/23_USR_LAB02-select-xyz.jpg" alt="Img 23 - USR_LAB02 executes a SELECT query in its own schema" width="300" height="200"/><br>
+    <em>Img 23 - USR_LAB02 executes a SELECT query in its own schema</em>
+</p>
 
 ```SQL
 -- na janela do usuário usr_lab01.
