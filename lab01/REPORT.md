@@ -1,6 +1,6 @@
 # Lab 01 - Users and Privileges
 Rafael Trevizoli - 1460282423016  
-Professora Carlos Augusto Lombardi Garcia
+Professor Carlos Augusto Lombardi Garcia
 
 **Topic:** [ADM_BD_01_privilegios.pptx](topic/ADM_BD_01_privilegios.pptx)  
 **Lab:** [ADM_BD_01_privilegios.pptx](lab/ADM_LAB_01_PRIVILEGIOS.txt)
@@ -321,34 +321,165 @@ select * from xyz; -- mostre o resultado desse comando e explique por que ele N�
     <em>Img 23 - USR_LAB02 executes a SELECT query in its own schema</em>
 </p>
 
+## In the USR_LAB01 user window, run the command below
+
 ```SQL
 -- na janela do usuário usr_lab01.
 -- a visão dba_sys_privs requer privilégio específico para ser acessada. O usuário usr_lab01 ainda não tem esse privilégio. rode o comando abaixo e veja se funciona?
+```
 
+```SQL
 select * from dba_sys_privs;
+```
 
+<p align="center">
+    <img src="lab/assets/24_USR_LAB001-privileges-select.jpg" alt="Img 24 - User USR_LAB01 executes a SELECT query on dba_sys_privs table" width="300" height="200"/><br>
+    <em>Img 24 - User USR_LAB01 executes a SELECT query on dba_sys_privs table</em>
+</p>
+
+## New role
+
+```SQL
 -- na janela do usuário system.
+```
 
+### Create
+
+```SQL
 CREATE ROLE new_dba;
+```
 
+<p align="center">
+    <img src="lab/assets/25_SYSTEM-create-role-new_dba.jpg" alt="Img 25 - SYSTEM creates a new role named new_dba" width="300" height="200"/><br>
+    <em>Img 25 - SYSTEM creates a new role named new_dba</em>
+</p>
+
+### Grant CONNECT
+
+```SQL
 GRANT CONNECT TO new_dba;
+```
 
+<p align="center">
+    <img src="lab/assets/26_Grant-connect-to-new_dba.jpg" alt="Img 26 - Grant CONNECT to new_dba" width="300" height="200"/><br>
+    <em>Img 26 - Grant CONNECT to new_dba</em>
+</p>
+
+### Grant SELECT ANY TABLE privilege
+
+```SQL
 GRANT SELECT ANY TABLE TO new_dba;
+```
 
+<p align="center">
+    <img src="lab/assets/27_Grant-select-any-table-to-new-dba.jpg" alt="Img 27 - Grant SELECT ANY TABLE to new_dba" width="300" height="200"/><br>
+    <em>Img 27 - Grant SELECT ANY TABLE privilege to new_dba</em>
+</p>
+
+### Grant SELECT_CATALOG_ROLE
+
+```SQL
 GRANT select_catalog_role TO new_dba;
+```
 
+<p align="center">
+    <img src="lab/assets/28_Grant-SELECT_CATALOG_ROLE-to-new_dba.jpg" alt="Img 28 - Grant SELECT_CATALOG_ROLE role to new_dba" width="300" height="200"/><br>
+    <em>Img 28 - Grant SELECT_CATALOG_ROLE role to new_dba</em>
+</p>
+
+### Grant role to `<user>`
+
+```SQL
 grant new_dba to USR_LAB01;
+```
 
+<p align="center">
+    <img src="lab/assets/29_Grant-new_dba-to-USR_LAB01.jpg" alt="Img 29 - Grant new_dba role to USR_LAB01" width="300" height="200"/><br>
+    <em>Img 29 - Grant new_dba role to USR_LAB01</em>
+</p>
+
+## Test the role granted to `<user>`
+
+We can separate the process of allowing the user `USR_LAB01` to access the `DBA_SYS_PRIVS` table into three simple steps:
+
+1. Create a new role
+2. Set up the role's permition  
+    2.1. Grant the role the privilege to connect  
+    2.2. Grant the necessary `SELECT` privileges  
+3. Grant the new role to the user.
+
+This approach is both simple and a best practice for managing user groups in the database.
+
+```SQL
 -- na janela do usuário usr_lab01. 
 -- refaça a sua conexão para garantir que os privilégios tenham sido atualizados.
 -- execute o comando e veja que ele funciona.
--- explique como foi o processo de atribuição do privilégio ao usuário usr_lab01 que permitiu a ele acessa a tabela.
-
-Através das views a seguir, exibir os privilégios dos usuários e roles criados nesse lab.
 select * from dba_sys_privs;
 
+-- explique como foi o processo de atribuição do privilégio ao usuário usr_lab01 que permitiu a ele acessa a tabela.
+```
+
+<p align="center">
+    <img src="lab/assets/30_USR_LAB01-privileges-select.jpg" alt="Img 30 - User USR_LAB01 executes a SELECT query on dba_sys_privs table" width="300" height="200"/><br>
+    <em>Img 30 - User USR_LAB01 executes a SELECT query on dba_sys_privs table</em>
+</p>
+
+## Roles and privileges created on this lab
+
+```SQL
+-- Através das views a seguir, exibir os privilégios dos usuários e roles criados nesse lab.
 SELECT * FROM DBA_ROLE_PRIVS;
+SELECT * FROM DBA_SYS_PRIVS;
 SELECT * FROM ROLE_ROLE_PRIVS;
 SELECT * FROM ROLE_SYS_PRIVS;
 SELECT * FROM ROLE_TAB_PRIVS;
 ```
+
+### Table-level privileges that allow USR_LAB02 to access the USR_LAB01.xyz table 
+
+```SQL
+SELECT * FROM DBA_TAB_PRIVS WHERE GRANTEE IN ('USR_LAB01', 'USR_LAB02');
+```
+
+<p align="center">
+    <img src="lab/assets/31_Tab-privileges-USR_LAB02-to-USR_LAB01-xyz.jpg" alt="Img 31 - Table USR_LAB01.xyz granted privileges to USR_LAB02" width="550" height="200"/><br>
+    <em>Img 31 - Table USR_LAB01.xyz granted privileges to USR_LAB02</em>
+</p>
+
+### Roles granted directly to the users in this lab
+
+```SQL
+SELECT DISTINCT GRANTED_ROLE FROM DBA_ROLE_PRIVS WHERE GRANTEE IN ('USR_LAB01', 'USR_LAB02');
+```
+
+<p align="center">
+    <img src="lab/assets/32_Roles-granted-to-USR_LAB01-and-USR_LAB02.jpg" alt="Img 32 - Roles granted to the users USR_LAB01 and USR_LAB02" width="550" height="200"/><br>
+    <em>Img 32 - Roles granted to the users USR_LAB01 and USR_LAB02</em>
+</p>
+
+### System privileges granted through roles to the users
+
+```SQL
+SELECT * FROM DBA_SYS_PRIVS
+WHERE GRANTEE IN (
+    SELECT DISTINCT GRANTED_ROLE
+    FROM DBA_ROLE_PRIVS
+    WHERE GRANTEE IN ('USR_LAB01', 'USR_LAB02')
+);
+```
+
+<p align="center">
+    <img src="lab/assets/33_Sys-prives-granted-to-users.jpg" alt="Img 33 - System privileges granted to the users USR_LAB01 and USR_LAB02" width="300" height="300"/><br>
+    <em>Img 33 - System privileges granted to the users USR_LAB01 and USR_LAB02</em>
+</p>
+
+### Roles assigned to the NEW_DBA role created in this lab
+
+```SQL
+SELECT * FROM ROLE_ROLE_PRIVS WHERE ROLE IN ('NEW_DBA');
+```
+
+<p align="center">
+    <img src="lab/assets/34_Roles-granted-to-new_dba.jpg" alt="Img 34 - Roles granted to new_dba role" width="300" height="200"/><br>
+    <em>Img 34 - Roles granted to new_dba role</em>
+</p>
