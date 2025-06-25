@@ -1,0 +1,40 @@
+                                FATEC
+
+                     ADMINISTRAÇÃO DE BANCO DE DADOS
+
+         LABORATÓRIO: AUDITORIA DE BANCO DE DADOS - VIA TRIGGER
+
+A partir do modelo de dados do esquema HR, execute os itens solicitados abaixo:
+
+Cenário: Você é o DBA do sistema em execução e precisa identificar anomalias na manipulação dos dados. Para executar essa tarefa você deve criar os recursos necessários para registrar em uma trilha de auditoria as manipulações dos dados durante as transações.
+
+A ameaça que você está tentando localizar é de alguém que está alterando o próprio salário sempre na véspera da data de pagamento que é o quinto dia  de cada mês e que após o pagamento ele volta o valor para o normal.
+
+As alterações desse tipo no período entre o primeiro dia do mês e o quinta dia deveriam ser proibidas, mas o invasor percebeu que não existe tal proteção e está se valendo dessa vulnerabilidade.
+
+	10) Criar um trigger capaz de registrar em uma tabela a auditoria dos dados manipulados;
+	20) Esse registro será executado por 5 meses seguidos;
+	30) Após o quinto mês você irá acessar a tabela de auditoria e apresentar os dados para a sua chefia.
+		
+Entregar como relatório:
+ - a estrutura da tabela criada
+ - o código-fonte do trigger
+ - o select com os dados inseridos pela auditoria
+
+Informações que podem ser obtidas a partir do oracle:
+select user from dual;[mostra o usuário logado no momento]
+select sysdate from dual; -- deve-se formatar a data e horário [mostra a data e hora atual do sistema]
+verificar a package sys_context (https://docs.oracle.com/cd/B19306_01/server.102/b14200/functions165.htm)
+lembrar de usar old e new do trigger;
+lembrar de usar os predicados "inserting", "updating" e "deleting"
+
+
+
+
+
+
+
+
+
+
+
