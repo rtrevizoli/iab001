@@ -24,7 +24,7 @@ According to the help text of `sqlplus`. the command above starts SQL*Plus witho
 ### 2. Conectar como usuário do banco de dados (em geral é o HR)
 
 <p align="center">
-    <img src="lab/assets/01_Connect-as-HR.jpg" alt="Img 01 - Connect as the user HR" width="300" height="200"/><br>
+    <img src="lab/assets/01_Connect-as-HR.jpg" alt="Img 01 - Connect as the user HR"/><br>
     <em>Img 01 - Connect as the user HR</em>
 </p>
 
@@ -39,14 +39,14 @@ INSERT INTO JOBS (
 ```
 
 <p align="center">
-    <img src="lab/assets/02_Insert-jobs.jpg" alt="Img 02 - Executes an INSERT query into jobs table" width="200" height="200"/><br>
+    <img src="lab/assets/02_Insert-jobs.jpg" alt="Img 02 - Executes an INSERT query into jobs table"/><br>
     <em>Img 02 - Executes an INSERT query into jobs table</em>
 </p>
 
 ### 4. Abrir outra janela com o SQLPlus e conectar com um usuário (pode ser o mesmo da etapa anterior)
 
 <p align="center">
-    <img src="lab/assets/03_Connect-HR2.jpg" alt="Img 03 - Connect as HR on new conn" width="300" height="200"/><br>
+    <img src="lab/assets/03_Connect-HR2.jpg" alt="Img 03 - Connect as HR on new conn"/><br>
     <em>Img 03 - Connect as HR on new conn</em>
 </p>
 
@@ -57,7 +57,7 @@ SELECT * FROM JOBS WHERE JOB_ID = 'MG_DEV';
 ```
 
 <p align="center">
-    <img src="lab/assets/04_Select-HR2.jpg" alt="Img 04 - Executes a SELECT query into jobs table on a new connection" width="300" height="200"/><br>
+    <img src="lab/assets/04_Select-HR2.jpg" alt="Img 04 - Executes a SELECT query into jobs table on a new connection"/><br>
     <em>Img 04 - Executes a SELECT query into jobs table on a new connection</em>
 </p>
 
@@ -72,7 +72,7 @@ Indeed, the session did not actually register the `INSERT`.
 The commit command is responsible for finalizing and registering the transaction started by the `INSERT` query, effectively recording the new data.
 
 <p align="center">
-    <img src="lab/assets/05_Commit-insert-jobs.jpg" alt="Img 05 - Executes the commit in the first section" width="300" height="200"/><br>
+    <img src="lab/assets/05_Commit-insert-jobs.jpg" alt="Img 05 - Executes the commit in the first section"/><br>
     <em>Img 05 - Executes the commit in the first section</em>
 </p>
 
@@ -81,7 +81,7 @@ The commit command is responsible for finalizing and registering the transaction
 The query returns the row recorded after the transaction commit.
 
 <p align="center">
-    <img src="lab/assets/06_Select2-HR2.jpg" alt="Img 06 - Executes the SELECT query again (connected as HR)" width="300" height="200"/><br>
+    <img src="lab/assets/06_Select2-HR2.jpg" alt="Img 06 - Executes the SELECT query again (connected as HR)"/><br>
     <em>Img 06 - Executes the SELECT query again (connected as HR)</em>
 </p>
 
@@ -94,7 +94,7 @@ WHERE JOB_ID = 'MG_DEV';
 ```
 
 <p align="center">
-    <img src="lab/assets/07_Update-Jobs.jpg" alt="Img 07 - Executes an UPDATE query in jobs table" width="300" height="200"/><br>
+    <img src="lab/assets/07_Update-Jobs.jpg" alt="Img 07 - Executes an UPDATE query in jobs table"/><br>
     <em>Img 07 - Executes an UPDATE query in jobs table</em>
 </p>
 
@@ -109,7 +109,7 @@ WHERE JOB_ID = 'MG_DEV';
 ```
 
 <p align="center">
-    <img src="lab/assets/08_Update-jobs-wout-commit.jpg" alt="Img 08 - Executes an UPDATE query without committing the last UPDATE in the same job (in a different session)" width="300" height="200"/><br>
+    <img src="lab/assets/08_Update-jobs-wout-commit.jpg" alt="Img 08 - Executes an UPDATE query without committing the last UPDATE in the same job (in a different session)"/><br>
     <em>Img 08 - Executes an UPDATE query without committing the last UPDATE in the same job (in a different session)</em>
 </p>
 
@@ -132,7 +132,7 @@ ORDER BY sw.seconds_in_wait DESC;
 ```
 
 <p align="center">
-    <img src="lab/assets/09_Lock-select.jpg" alt="Img 09 - Executes a SELECT query looking for db locks" width="500" height="300"/><br>
+    <img src="lab/assets/09_Lock-select.jpg" alt="Img 09 - Executes a SELECT query looking for db locks"/><br>
     <em>Img 09 - Executes a SELECT query looking for db locks</em>
 </p>
 
@@ -168,7 +168,7 @@ START WITH s.blocking_session IS NULL;
 ```
 
 <p align="center">
-    <img src="lab/assets/10_Select-section-hierarchy.jpg" alt="Img 10 - Executes a SELECT query looking for section hierarchy" width="700" height="450"/><br>
+    <img src="lab/assets/10_Select-section-hierarchy.jpg" alt="Img 10 - Executes a SELECT query looking for section hierarchy"/><br>
     <em>Img 10 - Executes a SELECT query looking for section hierarchy</em>
 </p>
 
@@ -179,28 +179,28 @@ After the `COMMIT` in the transaction running on Window 01, the second transacti
 #### Finalize the `UPDATE` in the window 01
 
 <p align="center">
-    <img src="lab/assets/11_Commit-update-jobs.jpg" alt="Img 11 - Executes the commit in the window 1" width="300" height="200"/><br>
+    <img src="lab/assets/11_Commit-update-jobs.jpg" alt="Img 11 - Executes the commit in the window 1"/><br>
     <em>Img 11 - Executes the commit in the window 1</em>
 </p>
 
 #### Window 02 after `COMMIT` in the window 01
 
 <p align="center">
-    <img src="lab/assets/12_Update-jobs-wout-commit-lock-release.jpg" alt="Img 12 - Checks the UPDATE query in the window 2 after lock release" width="300" height="200"/><br>
+    <img src="lab/assets/12_Update-jobs-wout-commit-lock-release.jpg" alt="Img 12 - Checks the UPDATE query in the window 2 after lock release"/><br>
     <em>Img 12 - Checks the UPDATE query in the window 2 after lock release</em>
 </p>
 
 #### Check the lock existance after `COMMIT` in the window 01
 
 <p align="center">
-    <img src="lab/assets/13_Lock-select-after-Update-jobs-commit.jpg" alt="Img 13 - Checks the lock existance after the commit in the window 1" width="500" height="300"/><br>
+    <img src="lab/assets/13_Lock-select-after-Update-jobs-commit.jpg" alt="Img 13 - Checks the lock existance after the commit in the window 1"/><br>
     <em>Img 13 - Checks the lock existance after the commit in the window 1</em>
 </p>
 
 #### Check the cection hierarchy after `COMMIT` in the window 01
 
 <p align="center">
-    <img src="lab/assets/14_Select-section-hierarchy-after-Update-jobs-commit.jpg" alt="Img 14 - Checks the section hierarchy after the lock release" width="700" height="450"/><br>
+    <img src="lab/assets/14_Select-section-hierarchy-after-Update-jobs-commit.jpg" alt="Img 14 - Checks the section hierarchy after the lock release"/><br>
     <em>Img 14 - Checks the section hierarchy after the lock release</em>
 </p>
 
@@ -217,12 +217,12 @@ The `UPDATE` in Window 2 completed successfully but did not affect any rows.
 > The procedure was executed by connecting to another virtual machine using VirtualBox, as shown in images 15 and 16 below.
 
 <p align="center">
-    <img src="lab/assets/15_VirtualBox-w-both-VMs.jpg" alt="Img 15 - VirtualBox VM list with both Oracle Linux Server" width="700" height="450"/><br>
+    <img src="lab/assets/15_VirtualBox-w-both-VMs.jpg" alt="Img 15 - VirtualBox VM list with both Oracle Linux Server"/><br>
     <em>Img 15 - VirtualBox VM list with both Oracle Linux Server</em>
 </p>
 
 <p align="center">
-    <img src="lab/assets/16_Address-of-both-VMs.jpg" alt="Img 16 - Address of both VMs" width="700" height="450"/><br>
+    <img src="lab/assets/16_Address-of-both-VMs.jpg" alt="Img 16 - Address of both VMs"/><br>
     <em>Img 16 - Address of both VMs</em>
 </p>
 
