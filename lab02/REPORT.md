@@ -455,5 +455,5 @@ After the `COMMIT` in the transaction running on Window 01, the second transacti
     <em>Img 30 - Checks the section hierarchy after the lock release</em>
 </p>
 
-### 14. Finalize finalizando a transação da janela 2
+### 29. Finalize finalizando a transação da janela 2
 There is nothing to commit or change here because the queries queued was commited in Window 1.
