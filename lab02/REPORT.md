@@ -211,3 +211,249 @@ There is nothing to commit or change here because the `UPDATE` query in Window 1
 The `UPDATE` in Window 2 completed successfully but did not affect any rows.
 
 ## Part II
+
+### 15. Realizar os procedimentos acima conectando no banco de um colega de sala. (indicar no relatório qual foi o colega escolhido)
+
+> The procedure was executed by connecting to another virtual machine using VirtualBox, as shown in images 15 and 16 below.
+
+<p align="center">
+    <img src="lab/assets/15_VirtualBox-w-both-VMs.jpg" alt="Img 15 - VirtualBox VM list with both Oracle Linux Server" width="700" height="450"/><br>
+    <em>Img 15 - VirtualBox VM list with both Oracle Linux Server</em>
+</p>
+
+<p align="center">
+    <img src="lab/assets/16_Address-of-both-VMs.jpg" alt="Img 16 - Address of both VMs" width="700" height="450"/><br>
+    <em>Img 16 - Address of both VMs</em>
+</p>
+
+### 16. Para conectar em outro banco, precisa habilitar a porta 1521 no firewall do micro que será o servidor e configurar o arquivo tnsnames.ora da sua máquina para apontar para a do colega. (D & E)
+
+```bash
+$ nano $ORACLE_HOME/network/admin/tnsnames.ora 
+```
+
+#### Default structure of `tnsnames.ora`
+
+```ora
+<CONNECTION-IDENTIFICATRO> =
+    (DESCRIPTION =
+        (ADDRESS_LIST =
+            (ADDRESS = (PROTOCOL = <PROTOCOL>)(HOST = <IP | HOSTNAME)(PORT = <PORT>))
+        )
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = <SERVICE-NAME>)
+        )
+    )
+```
+
+#### `tnsnames.ora` after some changes
+
+```ora
+ORCLCDB=localhost:1521/orclcdb
+ORCL=
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = 1521))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orcl)
+        )
+    )
+
+XE =
+    (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.15.20)(PORT = 1521))
+        (CONNECT_DATA =
+            (SERVER = DEDICATED)
+            (SERVICE_NAME = orcl)
+        )
+    )
+```
+
+### 17. Conectar como usuário do banco de dados (em geral é o HR)
+
+<p align="center">
+    <img src="lab/assets/17_Connect-as-HR-REMOTE-TNS.jpg" alt="Img 17 - Connect as the user HR on remote server using TNS conn type" /><br>
+    <em>Img 17 - Connect as the user HR on remote server using TNS conn type</em>
+</p>
+
+### 18. Inserir uma linha numa tabela desse usuário sem executar commit
+
+```SQL
+INSERT INTO JOBS (
+    JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY
+) VALUES (
+    'CFO', 'Chief Financial Office', 50000.00, 100000.00
+);
+```
+
+<p align="center">
+    <img src="lab/assets/18_Insert-jobs.jpg" alt="Img 18 - Executes an INSERT query into jobs table"/><br>
+    <em>Img 18 - Executes an INSERT query into jobs table</em>
+</p>
+
+### 19. Abrir outra janela com o SQLPlus e conectar com um usuário (pode ser o mesmo da etapa anterior)
+
+<p align="center">
+    <img src="lab/assets/19_Connect-HR-SERVER.jpg" alt="Img 19 - Connect as HR on Oracle Server"/><br>
+    <em>Img 19 - Connect as HR on Oracle Server</em>
+</p>
+
+### 20. Executar uma consulta que tente recuperar a linha inserida acima
+
+```SQL
+SELECT * FROM JOBS WHERE JOB_ID = 'CFO';
+```
+
+<p align="center">
+    <img src="lab/assets/20_Select-HR-SERVER.jpg" alt="Img 20 - Executes a SELECT query into jobs table on server as the HR user"/><br>
+    <em>Img 20 - Executes a SELECT query into jobs table on server as the HR user</em>
+</p>
+
+### 21. Documente o que aconteceu e explique
+
+Performing a `SELECT` query in a new connection as the HR user, the record inserted in step 18 (without a commit) returns zero rows.
+
+Indeed, the session did not actually register the `INSERT`.
+
+### 22. Execute o `COMMIT` na primeira janela. Documente e explique (D & E - Documente & Explique)
+
+The commit command is responsible for finalizing and registering the transaction started by the `INSERT` query, effectively recording the new data.
+
+<p align="center">
+    <img src="lab/assets/21_Commit-insert-jobs.jpg" alt="Img 21 - Executes the commit in the first section"/><br>
+    <em>Img 21 - Executes the commit in the first section</em>
+</p>
+
+### 23. Repetir a consulta da linha inserida (D & E)
+
+The query returns the row recorded after the transaction commit.
+
+<p align="center">
+    <img src="lab/assets/22_Select2-HR-SERVER.jpg" alt="Img 22 - Executes the SELECT query again (connected as HR)"/><br>
+    <em>Img 22 - Executes the SELECT query again (connected as HR)</em>
+</p>
+
+### 24. Na primeira janela, execute um `UPDATE` na linha inserida sem commit
+
+```SQL
+UPDATE JOBS
+SET JOB_TITLE = 'Conselho Federal de Odontologia'
+WHERE JOB_ID = 'CFO';
+```
+
+<p align="center">
+    <img src="lab/assets/23_Update-Jobs.jpg" alt="Img 23 - Executes an UPDATE query in jobs table"/><br>
+    <em>Img 23 - Executes an UPDATE query in jobs table</em>
+</p>
+
+### 25. Na segunda janela, execute outro `UPDATE` na mesma linha (D & E)
+
+The window got stuck while trying to perform the `UPDATE` query. The ScriptRunner task keep waiting.
+
+```SQL
+UPDATE JOBS
+SET MIN_SALARY = 70000
+WHERE JOB_ID = 'CFO';
+```
+
+<p align="center">
+    <img src="lab/assets/24_Update-jobs-wout-commit.jpg" alt="Img 24 - Executes an UPDATE query without committing the last UPDATE in the same job (in a different session)"/><br>
+    <em>Img 24 - Executes an UPDATE query without committing the last UPDATE in the same job (in a different session)</em>
+</p>
+
+### 26. Conectado como system, verifique a existência de lock (bloqueio) através do comando abaixo executado em um terceira janela.
+
+```SQL
+SELECT NVL(s.username, '(oracle)') AS username,
+       s.sid,
+       s.serial#,
+       sw.event,
+       sw.wait_class,
+       sw.wait_time,
+       sw.seconds_in_wait,
+       sw.state
+FROM   gv$session_wait sw,
+       gv$session s
+WHERE  s.sid = sw.sid
+and lower(sw.event) like '%lock%'
+ORDER BY sw.seconds_in_wait DESC;
+```
+
+<p align="center">
+    <img src="lab/assets/25_Lock-select.jpg" alt="Img 25 - Executes a SELECT query looking for db locks"/><br>
+    <em>Img 25 - Executes a SELECT query looking for db locks</em>
+</p>
+
+### 27. Para observar a hierarquia entre as sessões que estão gerando o lock nos registros, utilizar o comando abaixo.
+
+```SQL
+SELECT level,
+       lpad(' ',(level - 1) * 2, ' ')
+       || nvl(s.username, '(oracle)') AS username,
+       s.osuser,
+       s.sid,
+       s.serial#,
+       s.lockwait,
+       s.status,
+       s.module,
+       s.machine,
+       s.program,
+       TO_CHAR(s.logon_time, 'DD-MON-YYYY HH24:MI:SS') AS logon_time,
+       a.spid      processid,
+       s.process   clientpid
+FROM   gv$session   s,
+       gv$process   a
+WHERE  a.addr = s.paddr
+       AND ( level > 1
+             OR EXISTS (
+              SELECT 1
+              FROM   gv$session
+              WHERE  blocking_session = s.sid 
+             )
+           )
+CONNECT BY PRIOR s.sid = s.blocking_session
+START WITH s.blocking_session IS NULL;
+```
+
+<p align="center">
+    <img src="lab/assets/26_Select-section-hierarchy.jpg" alt="Img 26 - Executes a SELECT query looking for section hierarchy"/><br>
+    <em>Img 26 - Executes a SELECT query looking for section hierarchy</em>
+</p>
+
+### 28. Faça o `COMMIT` na Janela 01 (D & E)
+
+After the `COMMIT` in the transaction running on Window 01, the second transaction running on Window 02 was executed, the lock was released, and the **Section Hierarchy** showed no entries related to lock generation.
+
+#### Finalize the `UPDATE` in the window 01
+
+<p align="center">
+    <img src="lab/assets/27_Commit-update-jobs.jpg" alt="Img 27 - Executes the commit in the window 1"/><br>
+    <em>Img 27 - Executes the commit in the window 1</em>
+</p>
+
+#### Window 02 after `COMMIT` in the window 01
+
+> At this step, I had executed a `SELECT` query to check the updates, so I was no longer able to print the result from the lock release..
+
+<p align="center">
+    <img src="lab/assets" alt="Img 28 - Checks the UPDATE query in the window 2 after lock release"/><br>
+    <em>Img 28 - Checks the UPDATE query in the window 2 after lock release</em>
+</p>
+
+#### Check the lock existance after `COMMIT` in the window 01
+
+<p align="center">
+    <img src="lab/assets/29_Lock-select-after-Update-jobs-commit.jpg" alt="Img 29 - Checks the lock existance after the commit in the window 1"/><br>
+    <em>Img 29 - Checks the lock existance after the commit in the window 1</em>
+</p>
+
+#### Check the cection hierarchy after `COMMIT` in the window 01
+
+<p align="center">
+    <img src="lab/assets/30_Select-section-hierarchy-after-Update-jobs-commit.jpg" alt="Img 30 - Checks the section hierarchy after the lock release"/><br>
+    <em>Img 30 - Checks the section hierarchy after the lock release</em>
+</p>
+
+### 14. Finalize finalizando a transação da janela 2
+There is nothing to commit or change here because the queries queued was commited in Window 1.
